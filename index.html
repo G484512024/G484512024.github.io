@@ -1,162 +1,245 @@
 <!DOCTYPE html>
-<!-- oss-template-2026:placeholder （この目印で，scripts/check.sh が「準備中」のページかどうかを見分けます） -->
-<!--
-  テンプレートの「準備中」のページです．
-  このページが https://ユーザー名.github.io/ に表示されたら，GitHub Pages の設定は成功です．
-  第7回の実習4で，このファイルを第6回で作った index.html に置きかえます．
--->
 <html lang="ja">
 <head>
+  <!-- 文字コードをUTF-8に設定 -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>準備中</title>
+  <!-- スマートフォンなどの画面幅に自動調整するレスポンシブ設定 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポートフォリオサイト</title>
   <style>
-    /* ===== 色の設定 ===== */
-    :root {
-      --main-color: #2e7d32;  /* メインの色（見出し・番号） */
-      --bg-color: #f5f8f5;    /* ページの背景の色 */
-      --card-color: #ffffff;  /* カードの背景の色 */
-      --text-color: #222222;  /* 文字の色 */
-      --sub-color: #666666;   /* 補足の文字の色 */
-      --line-color: #dfe6df;  /* 区切り線の色 */
-    }
-
-    /* パソコンやスマートフォンがダークモードのときの色 */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --main-color: #81c784;
-        --bg-color: #121512;
-        --card-color: #1e231e;
-        --text-color: #e8ece8;
-        --sub-color: #a0a8a0;
-        --line-color: #2f362f;
-      }
-    }
-
-    /* ページ全体：カードを画面のまんなかに置く */
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
+    /* ========================================
+       全体のリセットと基本設定
+       ======================================== */
+    * {
       box-sizing: border-box;
-      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* ワインレッドを基調とした大人な雰囲気を演出する背景とフォント設定 */
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      background-color: #2b1d22;
+      color: #f3e9ec;
       line-height: 1.8;
-      color: var(--text-color);
-      background: var(--bg-color);
+      padding: 20px;
     }
 
-    /* まんなかのカード */
-    main {
-      width: 100%;
-      max-width: 600px;
-      padding: 32px 28px;
-      background: var(--card-color);
-      border-top: 6px solid var(--main-color);
+    /* ========================================
+       メインコンテナ（中央寄せ・カード風レイアウト）
+       ======================================== */
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      background-color: #38242b;
+      padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 1px solid #5c3a44;
     }
 
-    h1 {
-      margin: 0 0 4px;
-      font-size: clamp(1.3rem, 6vw, 1.6rem);  /* スマートフォンでは少し小さくする */
-      line-height: 1.4;
-      color: var(--main-color);
+    /* ========================================
+       ヘッダーエリア（名前とキャッチコピー）
+       ======================================== */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #5c3a44;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #f7d6e0;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .catchphrase {
+      font-size: 1.05rem;
+      color: #d1a3b2;
+      background-color: #452c35;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 1px solid #6b424f;
+    }
+
+    /* ========================================
+       セクション共通のスタイル
+       ======================================== */
+    section {
+      margin-bottom: 35px;
     }
 
     h2 {
-      margin: 28px 0 8px;
-      padding-bottom: 4px;
-      font-size: 1.05rem;
-      border-bottom: 1px solid var(--line-color);
+      font-size: 1.3rem;
+      color: #f7d6e0;
+      margin-bottom: 15px;
+      padding-left: 12px;
+      border-left: 4px solid #a33355;
     }
 
-    /* 「設定は成功」のバッジ */
-    .badge {
-      display: inline-block;
-      margin: 8px 0 0;
-      padding: 2px 12px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      color: var(--card-color);
-      background: var(--main-color);
-      border-radius: 999px;
+    /* ========================================
+       基本情報リストのスタイル
+       ======================================== */
+    .info-list {
+      list-style: none;
+      background-color: #2e1e24;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #4a3039;
     }
 
-    /* 「次にやること」の番号つきリスト */
-    ol {
-      margin: 0;
-      padding-left: 1.4em;
-    }
-    li {
-      margin-bottom: 6px;
-    }
-    li::marker {
-      font-weight: bold;
-      color: var(--main-color);
+    .info-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #4a3039;
+      font-size: 1rem;
     }
 
-    /* コマンドの見た目 */
-    code {
-      padding: 1px 6px;
-      font-family: "SFMono-Regular", Consolas, monospace;
-      font-size: 0.88em;
-      background: var(--bg-color);
-      border-radius: 4px;
-      white-space: nowrap;  /* コマンドの途中で折り返さない */
+    .info-list li:last-child {
+      border-bottom: none;
     }
 
-    /* 補足の小さな文字 */
-    .sub {
-      font-size: 0.9rem;
-      color: var(--sub-color);
+    /* ========================================
+       タグデザイン（趣味・プログラミング経験用）
+       ======================================== */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    /* いちばん下の小さな文字 */
+    .tag {
+      background-color: #4a2c37;
+      color: #f3cbd7;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      border: 1px solid #6b424f;
+    }
+
+    /* ========================================
+       テキストボックス（学びたいこと・ひとこと用）
+       ======================================== */
+    .text-box {
+      background-color: #2e1e24;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #4a3039;
+      font-size: 1rem;
+      color: #e6d3d9;
+    }
+
+    /* ========================================
+       フッターエリア
+       ======================================== */
     footer {
-      margin-top: 28px;
-      padding-top: 12px;
-      font-size: 0.8rem;
-      color: var(--sub-color);
-      border-top: 1px solid var(--line-color);
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #5c3a44;
+      font-size: 0.85rem;
+      color: #a88892;
     }
-    a {
-      color: var(--main-color);
+
+    /* ========================================
+       スマートフォン向けのレスポンシブ調整
+       ======================================== */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 20px 15px;
+      }
+
+      header h1 {
+        font-size: 1.7rem;
+      }
+
+      .catchphrase {
+        font-size: 0.95rem;
+        padding: 8px 14px;
+      }
+
+      h2 {
+        font-size: 1.15rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>このサイトは準備中です</h1>
-    <p class="badge">GitHub Pages の設定 OK</p>
-    <p>このページが表示されていれば，あなたのリポジトリは正しく公開されています．
-      あとは，このページを自分のサイトに置きかえるだけです．</p>
 
-    <h2>次にやること</h2>
-    <ol>
-      <li>このリポジトリを，SSHのURLで <code>git clone</code> する</li>
-      <li><code>index.html</code> を，第6回で作ったサイトに置きかえる</li>
-      <li><code>bash scripts/check.sh</code> で，公開前のチェックをする</li>
-      <li><code>git add</code> → <code>git commit</code> → <code>git push origin main</code> する</li>
-      <li>数分待ってから，このページを再読み込みする</li>
-    </ol>
-    <p class="sub">再読み込みしても変わらないときは，強制再読み込み（Windows：Ctrl + F5，Mac：Command + Shift + R）を試しましょう．</p>
+  <!-- ページ全体のラッパー要素 -->
+  <div class="container">
 
-    <h2>公開する前に</h2>
-    <ul>
-      <li>本名のフルネーム・学籍番号・住所・電話番号・メールアドレスが入っていないか</li>
-      <li>自己紹介に書いていないことを，AIが付け足していないか</li>
-    </ul>
-    <p class="sub">このリポジトリは Public です．サイトだけでなく，ファイルの中身やコミットの履歴も，誰でも見ることができます．</p>
+    <!-- ヘッダー：名前とキャッチコピーを表示 -->
+    <header>
+      <h1>蒼天</h1>
+      <p class="catchphrase">サッカーや筋トレ好きです！ プログラミングは苦手だけどそれなりに頑張ってます。</p>
+    </header>
 
+    <main>
+      <!-- 基本情報セクション -->
+      <section>
+        <h2>基本情報</h2>
+        <ul class="info-list">
+          <li><strong>名前：</strong>蒼天</li>
+          <li><strong>学年：</strong>3年性</li>
+          <li><strong>所属：</strong>拓殖大学工学部情報工学</li>
+        </ul>
+      </section>
+
+      <!-- 趣味・好きなことセクション -->
+      <section>
+        <h2>趣味・好きなこと</h2>
+        <div class="tag-container">
+          <span class="tag">サッカー</span>
+          <span class="tag">筋トレ</span>
+          <span class="tag">温泉</span>
+          <span class="tag">ダーツ</span>
+          <span class="tag">カラオケ</span>
+        </div>
+      </section>
+
+      <!-- プログラミング経験セクション -->
+      <section>
+        <h2>プログラミング経験</h2>
+        <div class="tag-container">
+          <span class="tag">java</span>
+          <span class="tag">html/css/js</span>
+          <span class="tag">python</span>
+          <span class="tag">R言語</span>
+          <span class="tag">Go言語</span>
+          <span class="tag">sql</span>
+        </div>
+      </section>
+
+      <!-- この授業で学びたいことセクション -->
+      <section>
+        <h2>この授業で学びたいこと</h2>
+        <div class="text-box">
+          <p>ossについて学びGitなどが扱えるようになる</p>
+        </div>
+      </section>
+
+      <!-- ひとことセクション -->
+      <section>
+        <h2>ひとこと</h2>
+        <div class="text-box">
+          <p>まだまだプログラミングは雑魚だけどこれからも頑張って精進していきます。<br>あと可愛い年下彼女欲しい</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター：コピーライト -->
     <footer>
-      拓殖大学工学部『オープンソースソフトウェア』2026年度<br>
-      <a href="https://github.com/tomohitoy/oss-practice-2026/blob/main-07/chap07/README.md">第7回の資料</a>
-      ・
-      <a href="https://github.com/tomohitoy/oss-template-2026">テンプレート（tomohitoy/oss-template-2026）</a>
+      <p>&copy; 2026 蒼天</p>
     </footer>
-  </main>
+
+  </div>
+
 </body>
 </html>
